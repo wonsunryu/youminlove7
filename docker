@@ -1,0 +1,17 @@
+FROM centos:centos7
+MAINTAINER wonsunryu <youminlove7@naver.com>
+RUN yum -y update; yum clean all
+RUN yum -y install epel-release tar ; yum clean all
+
+ADD apache-tomcat-8.0.21 /usr/local/apache-tomcat-8.0.21
+ADD jdk1.8.0_40 /usr/local/jdk1.8.0_40
+ADD server.xml /usr/local/apache-tomcat-8.0.21/conf/server.xml
+
+ENV JAVA_HOME /usr/local/jdk1.8.0_40
+
+RUN mkdir /data
+
+EXPOSE 8080
+EXPOSE 8009
+
+VOLUME /data
